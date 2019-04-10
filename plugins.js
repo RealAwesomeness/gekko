@@ -241,6 +241,17 @@ var plugins = [
       version: '0.18.0'
     }]
   },
+  {
+    name: 'RESTful API',
+    description: 'Allow external programs to access advice through api',
+    slug: 'RESTful API',
+    async: true,
+    modes: ['realtime'],
+    dependencies: [{
+      module: 'express',
+      version: '4.16.4'
+    }]
+  },
 ];
 
 module.exports = plugins;
