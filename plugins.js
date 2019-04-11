@@ -244,8 +244,8 @@ var plugins = [
   {
     name: 'RESTful API',
     description: 'Allow external programs to access advice through api',
-    slug: 'RESTful API',
-    async: true,
+    slug: 'restfulAPI',
+    async: false,
     modes: ['realtime'],
     dependencies: [{
       module: 'express',
