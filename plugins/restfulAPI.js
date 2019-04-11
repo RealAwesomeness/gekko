@@ -5,12 +5,22 @@ const express = requite("express")
 
 const app = express();
 const restfulAPI = function() {
-  app.listen(3000, () => {
-      console.log("Server running on port 3000");
-          app.get("/restfulAPI", (request, response, next) => {
-              response.json({'exchange':config.watch.exchange,'advice':advice.recommendation,'asset':config.watch.asset,'currency':config.watch.currency,'price':this.price});
-          });
-  })
+  _.bindAll(this);
+  this.advicePrice = 0
+  this.adviceTime = moment();
 }
-
+restfulAPI.prototype.processAdvice = function(advice) {
+  this.advicePrice = this.price;
+  this.adviceTime = advice.date;
+  
+  var response = {
+    'exchange':config.watch.exchange),
+    'recomentdation':advice.recommendation,
+    'asset':config.watch.asset,
+    'time':this.adviceTime,
+    'priceAtBuy':this.advicePrice
+  }
+  
+  setResponse(response);
+}
 module.exports = restfulAPI;
