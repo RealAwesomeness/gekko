@@ -27,7 +27,7 @@ Actor.prototype.processAdvice = function(advice) {
   log.info('\t Market price:', this.price);
   log.info('\t Based on market time:', this.marketTime.format('YYYY-MM-DD HH:mm:ss'));
   console.log()
-  fs.writefile('../advice.json',JSON.stringify({'recommendation':advice.recomendation, 'price':this.price, 'time':this.marketTime.format('YYYY-MM-DD HH:mm:ss'), 'asset':config.watch.asset, 'currency':config.watch.currency})
+  fs.appendfile('../advice.json',JSON.stringify({'recommendation':advice.recomendation, 'price':this.price, 'time':this.marketTime.format('YYYY-MM-DD HH:mm:ss'), 'asset':config.watch.asset, 'currency':config.watch.currency})
 };
 
 Actor.prototype.finalize = function(advice, done) {
