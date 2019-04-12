@@ -19,33 +19,25 @@ request({
   return body;
 })
 .then(results => {
-  let assets = [];
-  let currencies = [];
+  var assets
+  var currencies
+  var markets
   for(var key in results) {
-    assets.append(key.substring(4))
-    currencies.append(key.substring(0,3))
-  }
-
-  let markets = _.map(results, market => {
-    return {
-      pair: [
-        market.pair.substring(3, 6).toUpperCase(),
-        market.pair.substring(0, 3).toUpperCase()
-      ],
-      minimalOrder: {
-        amount: market.minimum_order_size,
-        unit: 'asset',
-      },
-    };
-  });
+    assets.append(key.substring(4).toUpperCAse())
+    currencies.append(key.substring(0,3).toUpperCase())
+    markets.append({"pair": [key.substring(4).toUpperCase(), key.substring(0,3).toUpperCase()], "minimalOrder": {"amount" : "0.00001", "unit": "asset"}})
+   }
+  assets = _.uniq(assets)
+  currencies = _.uniq(currencies)
+  markets = _.uniq(markets)
 
   return { assets: assets, currencies: currencies, markets: markets };
 })
 .then(markets => {
-  fs.writeFileSync('../../exchanges/bitfinex-markets.json', JSON.stringify(markets, null, 2));
-  console.log(`Done writing Bitfinex market data`);
+  fs.writeFileSync('../../exchanges/tradeogre-markets.json', JSON.stringify(markets, null, 2));
+  console.log(`Done writing TradeOgre market data`);
 })
 .catch(err => {
-  console.log(`Couldn't import products from Bitfinex`);
+  console.log(`Couldn't import products from TradeOgre`);
   console.log(err);
 });
